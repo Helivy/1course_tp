@@ -1,0 +1,37 @@
+#include <iostream>
+#include <cstdlib>
+#include <cmath>
+using namespace std;
+double integrate(double (*f)(double),double a,double b,double Fmax)
+    {
+    double x,y;
+    int m=5000;
+    double dx=(b-a)/m;
+    double dy=Fmax/m;
+    int count=0;
+    for(int i=0;i<=m;i++)
+        {
+        for(int j=0;j<=m;j++)
+            {
+            x=a+i*dx;
+            y=j*dy;
+            if(y<=f(x))
+                {
+                count++;
+                }
+            }   
+        }
+    double z=(double)count/(m+1)/(m+1);
+    return Fmax*(b-a)*z; 
+    }
+double F(double x)
+    {   
+    return 5*pow(x,4) - 3*pow(x,2) + 3; 
+    } 
+int main()
+    {
+        cout<<"Вычисление интеграла методом квадратов\n";
+        cout<<integrate(F,-1,4,1235);   
+        system("pause>nul");   
+        return 0; 
+    }
